@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MaquinaCafeApp
 {
+    // Versión 1.1 - Mejora en documentación del código
     public record Bebida(string Nombre, int Precio, int Stock);
 
     public class MaquinaCafe
