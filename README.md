@@ -1,4 +1,4 @@
-# ☕ Máquina de Café — Práctica TDD (ITLA)
+# Máquina de Café — Práctica TDD (ITLA)
 
 ## Descripción
 
