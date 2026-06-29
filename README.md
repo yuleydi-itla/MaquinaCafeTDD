@@ -1,98 +1,50 @@
-\# Máquina de Café — Práctica TDD (ITLA)
+# ☕ Máquina de Café — Práctica TDD (ITLA)
 
+## Descripción
 
+En este proyecto apliqué la metodología **Test-Driven Development (TDD)** para desarrollar una simulación sencilla de una máquina expendedora de café. Mi objetivo fue implementar cada funcionalidad siguiendo el ciclo de TDD, asegurándome de que el código estuviera respaldado por pruebas unitarias desde el inicio.
 
-\## ¿Qué es TDD?
+La aplicación permite insertar monedas, seleccionar una bebida, obtener el cambio, devolver el dinero y validar diferentes situaciones, como saldo insuficiente, bebidas inexistentes o falta de stock.
 
+## ¿Qué es TDD?
 
+**Test-Driven Development (TDD)** es una metodología de desarrollo en la que primero se escriben las pruebas y después se implementa el código necesario para que esas pruebas pasen correctamente.
 
-Test-Driven Development (TDD) es una metodología en la que las pruebas
+Este proceso se basa en tres etapas:
 
-automatizadas se escriben antes del código de producción. El desarrollo
+* **RED:** Escribí una prueba que describía el comportamiento esperado. Como la funcionalidad aún no existía, la prueba fallaba.
+* **GREEN:** Implementé el código mínimo necesario para que la prueba pasara.
+* **REFACTOR:** Mejoré la organización y el diseño del código sin modificar su funcionamiento y verificando que todas las pruebas siguieran pasando.
 
-avanza en ciclos cortos repetidos:
+## ¿Cómo apliqué TDD en este proyecto?
 
+Durante el desarrollo seguí el ciclo completo de TDD.
 
+Primero escribí los ocho casos de prueba (`TC-01` a `TC-08`) antes de implementar la lógica de la máquina de café. Al ejecutarlos por primera vez, todos fallaban, lo cual era el resultado esperado.
 
-1\. \*\*RED\*\* — Se escribe una prueba que describe el comportamiento
+Después desarrollé la clase `MaquinaCafe.cs` implementando únicamente el código necesario para que cada prueba fuera pasando.
 
-&#x20;  deseado. La prueba debe fallar, porque el código aún no existe.
+Finalmente realicé una refactorización para mejorar la estructura del proyecto. Creé el record `Bebida(Nombre, Precio, Stock)` para agrupar la información de cada bebida y extraje el método `ObtenerBebidaOLanzar`, evitando repetir código y haciendo que la implementación fuera más limpia y fácil de mantener. Después de estos cambios, verifiqué que las ocho pruebas continuaran ejecutándose correctamente.
 
-2\. \*\*GREEN\*\* — Se escribe el código mínimo necesario para que la
+## Casos de prueba implementados
 
-&#x20;  prueba pase.
+| ID    | Caso de prueba                                                                            |
+| ----- | ----------------------------------------------------------------------------------------- |
+| TC-01 | Verifiqué que al insertar una moneda el saldo se acumula correctamente.                   |
+| TC-02 | Comprobé que una bebida puede seleccionarse cuando el saldo es suficiente.                |
+| TC-03 | Verifiqué que no se dispense una bebida cuando el saldo es insuficiente.                  |
+| TC-04 | Comprobé que `ObtenerCambio()` devuelve el cambio correcto después de una compra.         |
+| TC-05 | Verifiqué que al seleccionar una bebida inexistente se genere una `ArgumentException`.    |
+| TC-06 | Comprobé que el menú devuelve correctamente las tres bebidas disponibles con sus precios. |
+| TC-07 | Verifiqué que `DevolverMonedas()` reinicia el saldo a cero.                               |
+| TC-08 | Comprobé que una bebida sin stock no puede ser dispensada.                                |
 
-3\. \*\*REFACTOR\*\* — Se mejora el diseño sin romper ninguna prueba
+## Cómo ejecutar el proyecto
 
-&#x20;  existente.
+1. Abrir la solución `MaquinaCafeTDD.sln` en Visual Studio 2022.
+2. Establecer el proyecto **MaquinaCafe** como proyecto de inicio y presionar **F5** para ejecutar la aplicación.
+3. Para ejecutar las pruebas unitarias, abrir **Test → Test Explorer** y seleccionar **Run All Tests**, o utilizar el atajo **Ctrl + R, A**.
 
+## Resultado
 
-
-\## Ciclo aplicado en este proyecto
-
-
-
-\- \*\*RED\*\*: se escribieron los 8 casos de prueba (TC-01 a TC-08) en
-
-&#x20; `MaquinaCafe.Test/MaquinaCafeTests.cs` antes de implementar
-
-&#x20; `MaquinaCafe.cs`. Al ejecutarlos por primera vez, todos fallaban.
-
-\- \*\*GREEN\*\*: se implementó `MaquinaCafe.cs` con la lógica mínima
-
-&#x20; (diccionarios simples para precio y stock) para hacer pasar los 8 tests.
-
-\- \*\*REFACTOR\*\*: se introdujo el record `Bebida(Nombre, Precio, Stock)`
-
-&#x20; para unificar precio y stock en un solo modelo, y se extrajo el método
-
-&#x20; `ObtenerBebidaOLanzar` para evitar duplicar la validación de existencia.
-
-&#x20; Los 8 tests se mantuvieron en verde después del cambio.
-
-
-
-\## Casos de prueba cubiertos
-
-
-
-| ID    | Escenario                                                    |
-
-|-------|---------------------------------------------------------------|
-
-| TC-01 | Insertar moneda acumula el saldo                              |
-
-| TC-02 | Seleccionar bebida con saldo suficiente devuelve true          |
-
-| TC-03 | Seleccionar bebida con saldo insuficiente devuelve false       |
-
-| TC-04 | ObtenerCambio() devuelve el cambio correcto tras dispensar     |
-
-| TC-05 | Seleccionar una bebida inexistente lanza ArgumentException     |
-
-| TC-06 | El menú devuelve 3 bebidas con sus precios                     |
-
-| TC-07 | DevolverMonedas() reinicia el saldo a cero                     |
-
-| TC-08 | Sin stock, SeleccionarBebida devuelve false                    |
-
-
-
-\## Cómo ejecutar el proyecto
-
-
-
-Abrir `MaquinaCafeTDD.sln` en Visual Studio 2022.
-
-
-
-Para correr la aplicación de consola: clic derecho en el proyecto
-
-`MaquinaCafe` → Establecer como proyecto de inicio → F5.
-
-
-
-Para correr las pruebas: `Test → Test Explorer → Run All Tests`
-
-(o `Ctrl+R, A`).
-
+Al finalizar el proyecto, logré que los ocho casos de prueba se ejecutaran correctamente. Esto me permitió comprobar que cada funcionalidad cumple con el comportamiento esperado y que las mejoras realizadas durante la refactorización no afectaron el funcionamiento de la aplicación.
